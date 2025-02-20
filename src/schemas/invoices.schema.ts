@@ -6,18 +6,18 @@ export type InvoiceDocument = Invoice & Document;
 @Schema()
 export class Invoice {
   @Prop({ required: true })
-  user_id: string; // ID del usuario que realizó la compra
+  user_id: string;
 
   @Prop({
     type: [{ product_id: { type: String }, quantity: { type: Number } }],
   })
-  products: { product_id: string; quantity: number }[]; // Lista de productos y cantidades
+  products: { product_id: string; quantity: number }[];
 
   @Prop({ required: true })
-  total: number; // Total de la factura
+  total: number;
 
   @Prop({ required: true })
-  date: Date; // Fecha de la factura
+  date: Date;
 }
 
 export const InvoiceSchema = SchemaFactory.createForClass(Invoice);

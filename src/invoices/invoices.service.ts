@@ -3,13 +3,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Invoice, InvoiceDocument } from '../schemas/invoices.schema';
 import { CreateInvoiceDto } from '../dto/create-invoice.dto';
-import { Product } from '../schemas/products.schema'; // Importa el esquema de productos
+import { Product } from '../schemas/products.schema';
 
 @Injectable()
 export class InvoicesService {
   constructor(
     @InjectModel(Invoice.name) private invoiceModel: Model<InvoiceDocument>,
-    @InjectModel(Product.name) private productModel: Model<Product>, // Para obtener productos
+    @InjectModel(Product.name) private productModel: Model<Product>,
   ) {}
 
   async create(createInvoiceDto: CreateInvoiceDto): Promise<Invoice> {
@@ -31,7 +31,6 @@ export class InvoicesService {
       return acc;
     }, 0);
 
-    // Ahora crea la factura
     const invoice = new this.invoiceModel({
       user_id: createInvoiceDto.user_id,
       products: createInvoiceDto.products,
