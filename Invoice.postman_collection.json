@@ -1,0 +1,596 @@
+{
+	"info": {
+		"_postman_id": "68c76ea1-5da8-4d25-b24a-ca08d7888c2c",
+		"name": "Invoice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17219247"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"admin\",\r\n  \"email\": \"admin@admin.com\",\r\n  \"password\": \"123456\",\r\n  \"role\": \"admin\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"register"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "hola@hola.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@admin.com\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoice-be-production-f950.up.railway.app/auth/login",
+							"protocol": "https",
+							"host": [
+								"invoice-be-production-f950",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "hola@hola.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjdiZDg4NTliNWNhZGE1N2JmYzVmYSIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQwMDk0OTU4LCJleHAiOjE3NDAwOTg1NTh9.Ni5t230Gcz6GVLrcoh9r6gs6wIiVeEwleJiS8-OVmWs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Juan Pérez\",\r\n  \"email\": \"juan@example.com\",\r\n  \"password\": \"123456\",\r\n  \"role\": \"user\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoice-be-production-f950.up.railway.app/users",
+							"protocol": "https",
+							"host": [
+								"invoice-be-production-f950",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "hola@hola.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUdzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjI0NzMwZGRmNTBmMzY3YzNjOGNmMyIsImVtYWlsIjoianVhbjFAZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Mzk4MzcwOTksImV4cCI6MTczOTg0MDY5OX0.xEhxXionqFDjcKIUXReXnNLgha20Po6ymkGbHrUYvzQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoice-be-production-f950.up.railway.app/users/67b3d1c578379bdc68a35a0a",
+							"protocol": "https",
+							"host": [
+								"invoice-be-production-f950",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"users",
+								"67b3d1c578379bdc68a35a0a"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "hola@hola.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjdiZDg4NTliNWNhZGE1N2JmYzVmYSIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQwMTU2Mzg5LCJleHAiOjE3NDAxNTk5ODl9.VPgGAr_RrBG9OvYe0xnhfbEd_r9V0M19G6h87y1c15g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjI0NzMwZGRmNTBmMzY3YzNjOGNmMyIsImVtYWlsIjoianVhbjFAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTczOTc0Mjc0MCwiZXhwIjoxNzM5NzQ2MzQwfQ.fItnZ8I8ivum_TEQzY4VQlLyS7XCwZBRGv0U24as8ZY",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"123456\"  \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoice-be-production-f950.up.railway.app/users/67c1a2181818181818181818",
+							"protocol": "https",
+							"host": [
+								"invoice-be-production-f950",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"users",
+								"67c1a2181818181818181818"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "Add Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjI1ZTQ3MmM4NGIxYTM2M2YwOGY3YSIsImVtYWlsIjoianVhbjJAZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Mzk4NDE3NDksImV4cCI6MTczOTg0NTM0OX0.z70NX1yF11UPqNDcnORWr6YVO5tNFi1xR4VZh1lPuVs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Pelota de futbol jabulani\",\r\n  \"description\": \"Pelota de futbol usada en el mundial 2010, recordada por ser impredecible\",\r\n  \"price\": 129.99,\r\n  \"stock\": 0,\r\n  \"status\": \"active\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoice-be-production-f950.up.railway.app/products",
+							"protocol": "https",
+							"host": [
+								"invoice-be-production-f950",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjI1ZTQ3MmM4NGIxYTM2M2YwOGY3YSIsImVtYWlsIjoianVhbjJAZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDAwMDUxNzAsImV4cCI6MTc0MDAwODc3MH0.SPW5CmO7Fj957FPhtNgoxNnD_tPQRtWQWaEDckcjzwk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Raqueta de Tenis Wilson Pro Staff\",\r\n  \"description\": \"Raqueta profesional de tenis, utilizada por jugadores de alto nivel.\",\r\n  \"price\": 199.99,\r\n  \"stock\": 20,\r\n  \"status\": \"active\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoice-be-production-f950.up.railway.app/products",
+							"protocol": "https",
+							"host": [
+								"invoice-be-production-f950",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Purchase one product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjNkMjNmNzgzNzliZGM2OGEzNWExMyIsImVtYWlsIjoianVhbjZAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTczOTg0MTg1OCwiZXhwIjoxNzM5ODQ1NDU4fQ.yx0iOhBycd9gOVndN337fVnif98V58oVrlS6hcu5x3Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"quantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoice-be-production-f950.up.railway.app/products/67b3e12d06f9f8bbe36851af/purchase",
+							"protocol": "https",
+							"host": [
+								"invoice-be-production-f950",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"products",
+								"67b3e12d06f9f8bbe36851af",
+								"purchase"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "Create Invoice",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjNkMWM1NzgzNzliZGM2OGEzNWEwYSIsImVtYWlsIjoianVhbjVAZXhhbXBsZS5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MDAxNzA4MCwiZXhwIjoxNzQwMDIwNjgwfQ.BchDNt8LCIdweInrYOBbRak7OAwZvcvkvGHNhi0cTlE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"67b3d1c578379bdc68a35a0a\",\r\n  \"products\": [\r\n    {\r\n      \"product_id\": \"67b3e0de06f9f8bbe36851ac\",\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"product_id\": \"67b3e12d06f9f8bbe36851af\",\r\n      \"quantity\": 2\r\n    }\r\n  ],\r\n  \"date\": \"2025-02-17T12:00:00Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoice-be-production-f950.up.railway.app/invoices",
+							"protocol": "https",
+							"host": [
+								"invoice-be-production-f950",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all invoices",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjI0NzMwZGRmNTBmMzY3YzNjOGNmMyIsImVtYWlsIjoianVhbjFAZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDAwMTIxNjUsImV4cCI6MTc0MDAxNTc2NX0.7J71c9P6Adj9NVYTz5JBCNRSqBAErJJ0TmLMUJsDAAo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://invoice-be-production-f950.up.railway.app/invoices",
+							"protocol": "https",
+							"host": [
+								"invoice-be-production-f950",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get invoice by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjI1ZTQ3MmM4NGIxYTM2M2YwOGY3YSIsImVtYWlsIjoianVhbjJAZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3Mzk4NDU0MTAsImV4cCI6MTczOTg0OTAxMH0.c0XZv26Ers3PNRwp-ABtAo8ACaMj_9eo7A1-NWdsNFI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://invoice-be-production-f950.up.railway.app/invoices/67b3eee13330070f1c7e1811",
+							"protocol": "https",
+							"host": [
+								"invoice-be-production-f950",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"invoices",
+								"67b3eee13330070f1c7e1811"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Checkout",
+			"item": [
+				{
+					"name": "Checkout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"67b3d1c578379bdc68a35a0a\",\r\n  \"products\": [\r\n    {\r\n      \"product_id\": \"67b3e0de06f9f8bbe36851ac\",\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"product_id\": \"67b3e12d06f9f8bbe36851af\",\r\n      \"quantity\": 1\r\n    }\r\n  ],\r\n  \"date\": \"2025-02-17T12:00:00Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://invoice-be-production-f950.up.railway.app/checkout",
+							"protocol": "https",
+							"host": [
+								"invoice-be-production-f950",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Get all user purchases",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjdiZDg4NTliNWNhZGE1N2JmYzVmYSIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQwMDk0OTU4LCJleHAiOjE3NDAwOTg1NTh9.Ni5t230Gcz6GVLrcoh9r6gs6wIiVeEwleJiS8-OVmWs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://invoice-be-production-f950.up.railway.app/orders/all-users-purchases-last-month",
+							"protocol": "https",
+							"host": [
+								"invoice-be-production-f950",
+								"up",
+								"railway",
+								"app"
+							],
+							"path": [
+								"orders",
+								"all-users-purchases-last-month"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userid",
+			"value": "67b3d23f78379bdc68a35a13",
+			"type": "string"
+		}
+	]
+}
