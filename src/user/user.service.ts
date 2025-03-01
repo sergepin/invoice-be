@@ -45,7 +45,9 @@ export class UserService {
     userRole: string,
   ): Promise<User | null> {
     if (userRole !== 'admin' && userId !== targetUserId) {
-      throw new ForbiddenException('You do not have permission to update this user');
+      throw new ForbiddenException(
+        'You do not have permission to update this user',
+      );
     }
 
     if (updateUserDto.password) {

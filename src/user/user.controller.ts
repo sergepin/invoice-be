@@ -46,7 +46,7 @@ export class UserController {
   }
 
   @Patch(':id')
-  @UseGuards(AuthGuard('jwt'), AdminGuard)
+  @UseGuards(AuthGuard('jwt'))
   async update(
     @Req() req: Request & { user: RequestUser },
     @Param('id') targetUserId: string,
