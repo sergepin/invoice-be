@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Order, OrderDocument } from '../schemas/orders.schema';
@@ -15,7 +15,6 @@ export class OrdersService {
   async getAllUsersPurchasesLastMonth() {
     const oneMonthAgo = moment().subtract(30, 'days').toDate();
 
-    // Obtener cantidad de compras por usuario
     const purchases = await this.orderModel.aggregate([
       {
         $match: {
@@ -44,5 +43,36 @@ export class OrdersService {
         totalPurchases: purchaseData ? purchaseData.totalPurchases : 0,
       };
     });
+  }
+
+  async getUserPurchases(
+    userId: string,
+    targetUserId: string,
+    userRole: string,
+  ) {
+    if (userRole !== 'admin' && userId !== targetUserId) {
+      throw new ForbiddenException(
+        'You do not have permission to view these orders',
+      );
+    }
+
+    const oneMonthAgo = moment().subtract(30, 'days').toDate();
+
+    const orders = await this.orderModel.find({
+      user_id: targetUserId,
+      status: 'completed',
+      date: { $gte: oneMonthAgo },
+    });
+
+    return orders.map((order) => ({
+      orderId: order._id.toString(),
+      userId: order.user_id,
+      totalAmount: order.totalAmount,
+      date: order.date,
+      products: order.products.map((p) => ({
+        productId: p.product_id,
+        quantity: p.quantity,
+      })),
+    }));
   }
 }
