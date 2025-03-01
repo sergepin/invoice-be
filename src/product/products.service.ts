@@ -20,7 +20,7 @@ export class ProductsService {
   }
 
   async findAll(): Promise<Product[]> {
-    return this.productModel.find({ status: 'active' }).exec();
+    return this.productModel.find({}).exec();
   }
 
   async findOne(id: string): Promise<Product | null> {
