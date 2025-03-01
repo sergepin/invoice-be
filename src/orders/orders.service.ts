@@ -95,7 +95,7 @@ export class OrdersService {
         productId: p.product_id.toString(),
         name:
           productMap.get(p.product_id.toString())?.name ||
-          'Producto no encontrado',
+          'Deleted Product',
         unitPrice: productMap.get(p.product_id.toString())?.price || 0,
         quantity: p.quantity,
       })),
@@ -115,7 +115,10 @@ export class OrdersService {
       date: { $gte: oneMonthAgo },
     });
 
-    // Obtener los ids de los productos en las órdenes
+    // Obtener los ids únicos de usuarios y productos
+    const userIds = [
+      ...new Set(orders.map((order) => order.user_id.toString())),
+    ];
     const productIds = [
       ...new Set(
         orders.flatMap((order) =>
@@ -124,12 +127,18 @@ export class OrdersService {
       ),
     ];
 
-    // Obtener los productos
-    const products = await this.productModel.find({
-      _id: { $in: productIds },
+    // Obtener usuarios y productos en paralelo
+    const [users, products] = await Promise.all([
+      this.userModel.find({ _id: { $in: userIds } }),
+      this.productModel.find({ _id: { $in: productIds } }),
+    ]);
+
+    // Crear mapas para acceso rápido
+    const userMap = new Map();
+    users.forEach((user) => {
+      userMap.set(user._id.toString(), user.name);
     });
 
-    // Crear un mapa de productos con sus detalles
     const productMap = new Map();
     products.forEach((product) => {
       productMap.set(product.id.toString(), {
@@ -138,10 +147,13 @@ export class OrdersService {
       });
     });
 
-    // Retornar las órdenes con detalles de productos
+    // Retornar las órdenes con detalles ampliados
     return orders.map((order) => ({
       orderId: order._id.toString(),
-      userId: order.user_id,
+      user: {
+        id: order.user_id.toString(),
+        name: userMap.get(order.user_id.toString()) || 'Deleted User',
+      },
       totalAmount: order.totalAmount,
       date: order.date,
       products: order.products.map((p) => ({
