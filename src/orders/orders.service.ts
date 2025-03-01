@@ -101,4 +101,57 @@ export class OrdersService {
       })),
     }));
   }
+
+  async getAllOrdersWithDetails(userRole: string) {
+    if (userRole !== 'admin') {
+      throw new ForbiddenException('Only admins can access this data');
+    }
+
+    const oneMonthAgo = moment().subtract(30, 'days').toDate();
+
+    // Obtener todas las órdenes completadas en los últimos 30 días
+    const orders = await this.orderModel.find({
+      status: 'completed',
+      date: { $gte: oneMonthAgo },
+    });
+
+    // Obtener los ids de los productos en las órdenes
+    const productIds = [
+      ...new Set(
+        orders.flatMap((order) =>
+          order.products.map((p) => p.product_id.toString()),
+        ),
+      ),
+    ];
+
+    // Obtener los productos
+    const products = await this.productModel.find({
+      _id: { $in: productIds },
+    });
+
+    // Crear un mapa de productos con sus detalles
+    const productMap = new Map();
+    products.forEach((product) => {
+      productMap.set(product.id.toString(), {
+        name: product.name,
+        price: product.price,
+      });
+    });
+
+    // Retornar las órdenes con detalles de productos
+    return orders.map((order) => ({
+      orderId: order._id.toString(),
+      userId: order.user_id,
+      totalAmount: order.totalAmount,
+      date: order.date,
+      products: order.products.map((p) => ({
+        productId: p.product_id.toString(),
+        name:
+          productMap.get(p.product_id.toString())?.name ||
+          'Producto no encontrado',
+        unitPrice: productMap.get(p.product_id.toString())?.price || 0,
+        quantity: p.quantity,
+      })),
+    }));
+  }
 }

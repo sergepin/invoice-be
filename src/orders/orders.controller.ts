@@ -37,4 +37,18 @@ export class OrdersController {
       purchases: await this.ordersService.getAllUsersPurchasesLastMonth(),
     };
   }
+
+  @Get('all-orders-with-details')
+  @UseGuards(AuthGuard('jwt'), AdminGuard)
+  async getAllOrdersWithDetails(@Req() req: Request & { user: RequestUser }) {
+    if (!req.user) {
+      throw new Error('User not authenticated');
+    }
+
+    const { role: userRole } = req.user;
+
+    return {
+      orders: await this.ordersService.getAllOrdersWithDetails(userRole),
+    };
+  }
 }
