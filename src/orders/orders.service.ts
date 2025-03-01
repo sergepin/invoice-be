@@ -109,13 +109,11 @@ export class OrdersService {
 
     const oneMonthAgo = moment().subtract(30, 'days').toDate();
 
-    // Obtener todas las órdenes completadas en los últimos 30 días
     const orders = await this.orderModel.find({
       status: 'completed',
       date: { $gte: oneMonthAgo },
     });
 
-    // Obtener los ids únicos de usuarios y productos
     const userIds = [
       ...new Set(orders.map((order) => order.user_id.toString())),
     ];
@@ -127,13 +125,11 @@ export class OrdersService {
       ),
     ];
 
-    // Obtener usuarios y productos en paralelo
     const [users, products] = await Promise.all([
       this.userModel.find({ _id: { $in: userIds } }),
       this.productModel.find({ _id: { $in: productIds } }),
     ]);
 
-    // Crear mapas para acceso rápido
     const userMap = new Map();
     users.forEach((user) => {
       userMap.set(user._id.toString(), user.name);
@@ -147,7 +143,6 @@ export class OrdersService {
       });
     });
 
-    // Retornar las órdenes con detalles ampliados
     return orders.map((order) => ({
       orderId: order._id.toString(),
       user: {
